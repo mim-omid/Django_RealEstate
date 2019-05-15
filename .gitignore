@@ -1,5 +1,6 @@
 BTRsVEnv/
 .vscode/
+secret_key.py
 
 ### Django ###
 *.log
