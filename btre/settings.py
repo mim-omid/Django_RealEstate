@@ -39,6 +39,15 @@ def find_or_create_secret_key():
 
 SECRET_KEY = find_or_create_secret_key()
 
+def findDbPasswd():
+    SECRET_KEY_DIR = os.path.dirname(__file__)
+    SECRET_KEY_FILEPATH = os.path.join(SECRET_KEY_DIR, 'secret_key.py') 
+    sys.path.insert(1,SECRET_KEY_DIR) 
+
+    #if os.path.isfile(SECRET_KEY_FILEPATH):
+    from secret_key import dpPassword
+    return dpPassword
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -96,8 +105,11 @@ WSGI_APPLICATION = 'btre.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'btredb',
+        'USER': 'postgres',
+        'PASSWORD':findDbPasswd(),
+        'HOST':'localhost',
     }
 }
 
